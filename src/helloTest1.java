@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.Assertions;
+/**import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -10,4 +10,4 @@ class helloTest1 {
         Assertions.assertEquals(hello.inc(1), 2);
 
     }
-}
+}**/

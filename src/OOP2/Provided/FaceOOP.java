@@ -43,7 +43,7 @@ public interface FaceOOP extends Iterable<Person>{
 	 * @throws ConnectionAlreadyExistException if the 2 
 	 * 		users are already friends.
 	 */
-	public void addFriendship(Person p1, Person p2) 
+	public void addFriendship(OOP2.Provided.Person p1, OOP2.Provided.Person p2)
 			throws PersonNotInSystemException, SamePersonException, ConnectionAlreadyExistException;
 	
 	
@@ -57,7 +57,7 @@ public interface FaceOOP extends Iterable<Person>{
 	 * 
 	 * @return an iterator over the statuses in p's feed.
 	 * @throws PersonNotInSystemException in case p is not a user of the system.*/
-	public StatusIterator getFeedByRecent(Person p) 
+	public StatusIterator getFeedByRecent(OOP2.Provided.Person p)
 			throws PersonNotInSystemException;
 	
 	/**
@@ -71,7 +71,7 @@ public interface FaceOOP extends Iterable<Person>{
 	 * 
 	 * @return an iterator over the statuses in p's feed.
 	 * @throws PersonNotInSystemException in case p is not a user of the system.*/
-	public StatusIterator getFeedByPopular(Person p) 
+	public StatusIterator getFeedByPopular(OOP2.Provided.Person p)
 			throws PersonNotInSystemException; 
 	
 	/**
@@ -85,7 +85,7 @@ public interface FaceOOP extends Iterable<Person>{
 	 * @throws PersonNotInSystemException if one of the Persons is not in the system,
 	 * and ConnectionDoesNotExistException if there is no path from source to target.
 	 */
-	public Integer rank(Person source, Person target) 
+	public Integer rank(OOP2.Provided.Person source, OOP2.Provided.Person target)
 			throws PersonNotInSystemException, ConnectionDoesNotExistException;
 	
 }

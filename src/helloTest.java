@@ -1,4 +1,4 @@
-import org.junit.jupiter.api.Assertions;
+/**import org.junit.jupiter.api.Assertions;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,4 +31,4 @@ class helloTest {
         Assertions.assertEquals(12, 12);
     }
 
-}
+}*/
