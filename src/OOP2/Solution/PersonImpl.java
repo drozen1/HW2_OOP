@@ -52,7 +52,9 @@ public class PersonImpl implements Person{
 			throw new ConnectionAlreadyExistException();
 		}
 		this.friends.add(p);
-		p.addFriend(this); //TODO: assuming p is reference (check)
+		PersonImpl pImpl = (PersonImpl) p;
+		pImpl.addFriendAux(this);
+		//p.addFriend(this); //TODO: assuming p is reference (check)
 	}
 
 	@Override
@@ -90,12 +92,20 @@ public class PersonImpl implements Person{
 
 
 	@Override
-	public boolean equals(Object o){
-		return false;
+	public boolean equals(Object o) {
+		if(o == null) return false;
+		if (o.getClass() != this.getClass()) return false;
+		PersonImpl p = (PersonImpl) o;
+		return this.id.equals(p.id);
 	}
 
 	@Override
-	public int compareTo(Person o) {
-		return 0;
+	public int compareTo(Person other) {
+		PersonImpl otherPerson = (PersonImpl) other;
+		return this.id - otherPerson.id;
+	}
+
+	public void addFriendAux(Person p){
+		this.friends.add(p);
 	}
 }

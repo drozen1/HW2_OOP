@@ -1,4 +1,4 @@
-/**import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Assertions;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,7 +19,7 @@ class helloTest {
         Assertions.assertEquals(1, 1);
         Assertions.assertEquals(21, 21);
         Assertions.assertEquals(31, 31);
-        Assertions.assertEquals(14, 1);
+        Assertions.assertEquals(14, 14);
         Assertions.assertEquals(12, 12);
     }
 
@@ -31,4 +31,4 @@ class helloTest {
         Assertions.assertEquals(12, 12);
     }
 
-}*/
+}

@@ -1,4 +1,4 @@
-/**package OOP2.Tests;
+package OOP2.Tests;
 
 import java.util.Iterator;
 
@@ -50,4 +50,4 @@ public class Example {
 			Assert.fail();
 		} 
 	}
-}**/
+}
