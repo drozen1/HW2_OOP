@@ -8,6 +8,8 @@
       <root url="jar://$KOTLIN_BUNDLED$/lib/kotlin-stdlib-jdk8.jar!/" />
       <root url="jar://$USER_HOME$/Downloads/junit4/junit-4.12.jar!/" />
       <root url="jar://$USER_HOME$/Downloads/junit4/hamcrest-core-1.3.jar!/" />
+      <root url="jar://$USER_HOME$/OneDrive/Desktop/Technion/S7/Oop/junit4/hamcrest-core-1.3.jar!/" />
+      <root url="jar://$USER_HOME$/OneDrive/Desktop/Technion/S7/Oop/junit4/junit-4.12.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

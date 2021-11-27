@@ -172,8 +172,86 @@ class StatusImplTest {
         Assertions.assertEquals(list.contains(p4), false);
 
 
+        //get statuses recent
+        Iterable<Status> it =  p1.getStatusesRecent();
+        var a = it.iterator();
+        var next = a.next();
+        Assertions.assertEquals(next.getContent(), "p1s2");
+        Assertions.assertEquals(next.getId(), 1);
+        next = a.next();
+        Assertions.assertEquals(next.getContent(), "p1s1");
+        Assertions.assertEquals(next.getId(), 0);
 
+        it =  p2.getStatusesRecent();
+        a = it.iterator();
+        next = a.next();
+        Assertions.assertEquals(next.getContent(), "p2s3");
+        Assertions.assertEquals(next.getId(), 2);
+        next = a.next();
+        Assertions.assertEquals(next.getContent(), "p2s2");
+        Assertions.assertEquals(next.getId(), 1);
+        next = a.next();
+        Assertions.assertEquals(next.getContent(), "p2s1");
+        Assertions.assertEquals(next.getId(), 0);
 
+        //get statuses popular
+        it =  p2.getStatusesPopular();
+        a = it.iterator();
+        next = a.next();
+        Assertions.assertEquals(next.getContent(), "p2s3");
+        Assertions.assertEquals(next.getId(), 2);
+        next = a.next();
+        Assertions.assertEquals(next.getContent(), "p2s2");
+        Assertions.assertEquals(next.getId(), 1);
+        next = a.next();
+        Assertions.assertEquals(next.getContent(), "p2s1");
+        Assertions.assertEquals(next.getId(), 0);
+
+        s21.like(p4);
+        s23.unlike(p1);
+        s23.unlike(p2);
+        s23.unlike(p3);
+        s22.unlike(p1);
+        s22.unlike(p2);
+        s22.unlike(p3);
+
+        it =  p2.getStatusesPopular();
+        a = it.iterator();
+        next = a.next();
+        Assertions.assertEquals(next.getContent(), "p2s1");
+        Assertions.assertEquals(next.getId(), 0);
+        next = a.next();
+        Assertions.assertEquals(next.getContent(), "p2s3");
+        Assertions.assertEquals(next.getId(), 2);
+        next = a.next();
+        Assertions.assertEquals(next.getContent(), "p2s2");
+        Assertions.assertEquals(next.getId(), 1);
+
+        it =  p5.getStatusesPopular();
+        a = it.iterator();
+        next = a.next();
+        Assertions.assertEquals(next.getContent(), "p5s3");
+        Assertions.assertEquals(next.getId(), 2);
+        next = a.next();
+        Assertions.assertEquals(next.getContent(), "p5s2");
+        Assertions.assertEquals(next.getId(), 1);
+        next = a.next();
+        Assertions.assertEquals(next.getContent(), "p5s1");
+        Assertions.assertEquals(next.getId(), 0);
+
+        //compare to
+        Assertions.assertEquals(p1.compareTo(p2) < 0 , true);
+        Assertions.assertEquals(p1.compareTo(p4) < 0 , true);
+        Assertions.assertEquals(p1.compareTo(p1) == 0 , true);
+        Assertions.assertEquals(p4.compareTo(p2) > 0 , true);
+        Assertions.assertEquals(p4.compareTo(p3) > 0 , true);
+
+        //equals
+        Assertions.assertEquals(p1.equals(p1),true);
+        Assertions.assertEquals(p1.equals(p2),false);
+        Assertions.assertEquals(p1.equals(p3),false);
+        Assertions.assertEquals(p4.equals(p4),true);
+        Assertions.assertEquals(p4.equals(p5),false);
     }
 
 }
