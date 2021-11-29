@@ -18,10 +18,25 @@ public class StatusIteratorImpl implements StatusIterator {
     public StatusIteratorImpl(Collection<Person> personCollection, boolean isRecent){
         this.personIterator = personCollection.iterator();
         this.isRecent = isRecent;
-        if (isRecent) {
-            this.statusIterator = this.personIterator.next().getStatusesRecent().iterator();
+
+        if (this.personIterator.hasNext()) {
+            if (isRecent){
+                this.statusIterator = this.personIterator.next().getStatusesRecent().iterator();
+            } else {
+                this.statusIterator = this.personIterator.next().getStatusesPopular().iterator();
+            }
         } else {
-            this.statusIterator = this.personIterator.next().getStatusesPopular().iterator();
+            this.statusIterator = new Iterator<Status>() {
+                @Override
+                public boolean hasNext() {
+                    return false;
+                }
+
+                @Override
+                public Status next() {
+                    return null;
+                }
+            };
         }
         while (!statusIterator.hasNext()) {
             if (!this.personIterator.hasNext()){
