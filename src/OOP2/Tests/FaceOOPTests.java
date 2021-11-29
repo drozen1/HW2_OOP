@@ -5,6 +5,7 @@ import OOP2.Solution.FaceOOPImpl;
 import OOP2.Solution.PersonImpl;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 public class FaceOOPTests {
     FaceOOPImpl faceOOP;
@@ -21,7 +22,7 @@ public class FaceOOPTests {
     @Test
     public void joinFaceOOP_OldPerson_Test() throws PersonAlreadyInSystemException {
         var person = faceOOP.joinFaceOOP(1, "Ash");
-        Assert.assertThrows(PersonAlreadyInSystemException.class, ()-> faceOOP.joinFaceOOP(1, "dont care"));
+        Assertions.assertThrows(PersonAlreadyInSystemException.class, ()-> faceOOP.joinFaceOOP(1, "dont care"));
     }
 
     @Test
@@ -31,7 +32,7 @@ public class FaceOOPTests {
         Assert.assertEquals(1, faceOOP.size());
         faceOOP.joinFaceOOP(2, "Ash");
         Assert.assertEquals(2, faceOOP.size());
-        Assert.assertThrows(PersonAlreadyInSystemException.class, ()-> faceOOP.joinFaceOOP(2, "dont care"));
+        Assertions.assertThrows(PersonAlreadyInSystemException.class, ()-> faceOOP.joinFaceOOP(2, "dont care"));
     }
 
     @Test
@@ -42,21 +43,21 @@ public class FaceOOPTests {
 
     @Test
     public void GetUser_NotExists_Test() {
-        Assert.assertThrows(PersonNotInSystemException.class, ()-> faceOOP.getUser(2));
+        Assertions.assertThrows(PersonNotInSystemException.class, ()-> faceOOP.getUser(2));
     }
 
     @Test
     public void addFriendship_PersonNotInSystem_Test() {
-        Assert.assertThrows(PersonNotInSystemException.class, ()->
+        Assertions.assertThrows(PersonNotInSystemException.class, ()->
                 faceOOP.addFriendship(new PersonImpl(1, "Ash"), new PersonImpl(2, "Brock")));
 
 
-        Assert.assertThrows(PersonNotInSystemException.class, ()->{
+        Assertions.assertThrows(PersonNotInSystemException.class, ()->{
             faceOOP.joinFaceOOP(1, "Misty");
             faceOOP.addFriendship(new PersonImpl(1, "Misty"), new PersonImpl(2, "Brock"));
         });
 
-        Assert.assertThrows(PersonNotInSystemException.class, ()->{
+        Assertions.assertThrows(PersonNotInSystemException.class, ()->{
             faceOOP.joinFaceOOP(2, "Dude");
             faceOOP.addFriendship(new PersonImpl(3, "NotMisty"), new PersonImpl(2, "Dude"));
         });
@@ -64,10 +65,10 @@ public class FaceOOPTests {
 
     @Test
     public void addFriendship_SamePerson_Test() {
-        Assert.assertThrows(PersonNotInSystemException.class, ()->
+        Assertions.assertThrows(PersonNotInSystemException.class, ()->
                 faceOOP.addFriendship(new PersonImpl(1, "Ash"), new PersonImpl(1, "Ash")));
 
-        Assert.assertThrows(SamePersonException.class, ()->{
+        Assertions.assertThrows(SamePersonException.class, ()->{
             faceOOP.joinFaceOOP(2, "Dude");
             faceOOP.addFriendship(new PersonImpl(2, "Dude"), new PersonImpl(2, "Dude"));
         });
@@ -75,7 +76,7 @@ public class FaceOOPTests {
 
     @Test
     public void addFriendship_AlreadyExistsNewObjects_Test() {
-        Assert.assertThrows(ConnectionAlreadyExistException.class, ()->{
+        Assertions.assertThrows(ConnectionAlreadyExistException.class, ()->{
             faceOOP.joinFaceOOP(2, "Dude");
             faceOOP.joinFaceOOP(4, "Two Dudes");
             faceOOP.addFriendship(new PersonImpl(2, "Dude"), new PersonImpl(4, "Two Dudes"));
@@ -85,7 +86,7 @@ public class FaceOOPTests {
 
     @Test
     public void addFriendship_AlreadyExistsSameObjects_Test() {
-        Assert.assertThrows(ConnectionAlreadyExistException.class, ()->{
+        Assertions.assertThrows(ConnectionAlreadyExistException.class, ()->{
             faceOOP.joinFaceOOP(2, "Dude");
             faceOOP.joinFaceOOP(4, "Two Dudes");
             var p1 = new PersonImpl(2, "Dude");
@@ -97,19 +98,19 @@ public class FaceOOPTests {
 
     @Test
     public void Rank_PersonNotInSystem_Test(){
-        Assert.assertThrows(PersonNotInSystemException.class, ()->
+        Assertions.assertThrows(PersonNotInSystemException.class, ()->
                 faceOOP.rank(new PersonImpl(1, "Ash"), new PersonImpl(1, "Ash")));
 
-        Assert.assertThrows(PersonNotInSystemException.class, ()->
+        Assertions.assertThrows(PersonNotInSystemException.class, ()->
                 faceOOP.rank(new PersonImpl(1, "Ash"), new PersonImpl(2, "Brock")));
 
 
-        Assert.assertThrows(PersonNotInSystemException.class, ()->{
+        Assertions.assertThrows(PersonNotInSystemException.class, ()->{
             faceOOP.joinFaceOOP(1, "Misty");
             faceOOP.rank(new PersonImpl(1, "Misty"), new PersonImpl(2, "Brock"));
         });
 
-        Assert.assertThrows(PersonNotInSystemException.class, ()->{
+        Assertions.assertThrows(PersonNotInSystemException.class, ()->{
             faceOOP.joinFaceOOP(2, "Dude");
             faceOOP.rank(new PersonImpl(3, "NotMisty"), new PersonImpl(2, "Dude"));
         });
@@ -123,7 +124,7 @@ public class FaceOOPTests {
 
     @Test
     public void Rank_NoConnection_Test() {
-        Assert.assertThrows(ConnectionDoesNotExistException.class, ()->{
+        Assertions.assertThrows(ConnectionDoesNotExistException.class, ()->{
             faceOOP.joinFaceOOP(2, "Pulp");
             faceOOP.joinFaceOOP(4, "Fiction");
             faceOOP.rank(new PersonImpl(2, "Pulp"), new PersonImpl(4, "Fiction"));

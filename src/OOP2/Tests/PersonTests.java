@@ -7,6 +7,7 @@ import OOP2.Solution.PersonImpl;
 import OOP2.Solution.StatusImpl;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -59,13 +60,13 @@ public class PersonTests {
 
     @Test
     public void AddFriend_SamePerson_Test(){
-        Assert.assertThrows(SamePersonException.class, ()-> p.addFriend(p));
+        Assertions.assertThrows(SamePersonException.class, ()-> p.addFriend(p));
     }
 
     @Test
     public void AddFriend_AlreadyConnected_Test() {
         var p2 = new PersonImpl(2, "Giglipuff");
-        Assert.assertThrows(ConnectionAlreadyExistException.class, ()-> {
+        Assertions.assertThrows(ConnectionAlreadyExistException.class, ()-> {
             p.addFriend(p2);
             p.addFriend(p2);
         });
