@@ -465,6 +465,31 @@ public class FaceOOPImplTest {
 
 
     }
+
+    @Test
+    public void addFriendship_AlreadyExists_Test(){
+        int count =0;
+        FaceOOP faceOOP = new FaceOOPImpl();
+            try {
+                faceOOP.joinFaceOOP(2, "Dude");
+                faceOOP.joinFaceOOP(4, "Two Dudes");
+                faceOOP.addFriendship(new PersonImpl(2, "Dude"), new PersonImpl(4, "Two Dudes"));
+                faceOOP.addFriendship(new PersonImpl(2, "Dude"), new PersonImpl(4, "Two Dudes"));
+            }
+            catch (PersonAlreadyInSystemException e) {
+                Assertions.fail();
+            }
+            catch (ConnectionAlreadyExistException e) {
+                count++;
+            }
+            catch (PersonNotInSystemException e) {
+                Assertions.fail();
+            }
+            catch (SamePersonException e) {
+                Assertions.fail();
+            }
+        Assertions.assertEquals(1,count);
+    }
 }
 
 
