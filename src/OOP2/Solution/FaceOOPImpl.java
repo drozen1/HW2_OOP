@@ -94,9 +94,12 @@ public class FaceOOPImpl implements FaceOOP {
 		if (!allUsers.contains(v)){
 			throw new PersonNotInSystemException();
 		}
-		Collection<Person> personCollection = sortingFriends(p.getFriends());
-		if (personCollection.contains(p)){
-			personCollection.remove(p);
+
+		Person curr = this.getUser(p.getId());
+
+		Collection<Person> personCollection = sortingFriends(curr.getFriends());
+		if (personCollection.contains(curr)){
+			personCollection.remove(curr);
 		}
 		return new StatusIteratorImpl(personCollection,true);
 	}
@@ -108,9 +111,10 @@ public class FaceOOPImpl implements FaceOOP {
 		if (!allUsers.contains(v)) {
 			throw new PersonNotInSystemException();
 		}
-		Collection<Person> personCollection = sortingFriends(p.getFriends());
-		if (personCollection.contains(p)){
-			personCollection.remove(p);
+		Person curr = this.getUser(p.getId());
+		Collection<Person> personCollection = sortingFriends(curr.getFriends());
+		if (personCollection.contains(curr)){
+			personCollection.remove(curr);
 		}
 		return new StatusIteratorImpl(personCollection,false);
 	}
@@ -126,7 +130,9 @@ public class FaceOOPImpl implements FaceOOP {
 			throw new PersonNotInSystemException();
 		}
 
-		PersonImpl sourceImpl = (PersonImpl) source;
+		Person curr = this.getUser(source.getId());
+
+		PersonImpl sourceImpl = (PersonImpl) curr;
 		Vertrx v = new Vertrx(sourceImpl);
 		LinkedList<Vertrx> neighboors = BFS(v);
 
