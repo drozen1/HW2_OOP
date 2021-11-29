@@ -83,15 +83,7 @@ public class FaceOOPImpl implements FaceOOP {
 		if (p1.getFriends().contains(p2)) {
 			throw new ConnectionAlreadyExistException();
 		}
-		Person curr1 = null, curr2 = null;
-		for (Vertrx it : this.allUsers) {
-			if (it.p.getId().equals(p1.getId())) {
-				curr1 = it.p;
-			}
-			if (it.p.getId().equals(p2.getId())) {
-				curr2 = it.p;
-			}
-		}
+		Person curr1 = this.getUser(p1.getId()), curr2 = this.getUser(p2.getId());
 		curr1.addFriend(curr2);
 	}
 
