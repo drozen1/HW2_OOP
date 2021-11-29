@@ -12,6 +12,7 @@ import OOP2.Provided.Status;
 import OOP2.Provided.Person;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -32,6 +33,13 @@ class StatusImplTest {
 
         PersonImpl p4 = new PersonImpl(4,"dor4");
         Status s41 = p4.postStatus("p4s1");
+
+        Iterable<Status> it1 =  p4.getStatusesRecent();
+        Iterator<Status> it11 = it1.iterator();
+        boolean s111 = it11.hasNext();
+        it11.next();
+        s111 = it11.hasNext();
+
 
         PersonImpl p5 = new PersonImpl(5,"dor5");
         Status s51 = p5.postStatus("p5s1");

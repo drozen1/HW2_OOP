@@ -8,11 +8,12 @@ import OOP2.Provided.Status;
 import java.util.*;
 
 public class PersonImpl implements Person{
-	private Integer id;
+	private final Integer id;
 	private String name;
 	private List<Status> statuses;
 	private Integer nextIdStatus;
 	private Set<Person> friends;
+	public Integer visitedIndex;
 	/**
 	 * Constructor receiving person's id and name.
 	 */
@@ -23,6 +24,7 @@ public class PersonImpl implements Person{
 		this.statuses = new ArrayList<>();
 		this.nextIdStatus = 0;
 		this.friends = new HashSet<>();
+		this.visitedIndex = -1;
 	}
 
 	@Override
@@ -54,7 +56,6 @@ public class PersonImpl implements Person{
 		this.friends.add(p);
 		PersonImpl pImpl = (PersonImpl) p;
 		pImpl.addFriendAux(this);
-		//p.addFriend(this); //TODO: assuming p is reference (check)
 	}
 
 	@Override
