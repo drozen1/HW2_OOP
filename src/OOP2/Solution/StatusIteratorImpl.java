@@ -42,7 +42,6 @@ public class StatusIteratorImpl implements StatusIterator {
             if (!this.personIterator.hasNext()){
                 break;
             }
-            this.personIterator.next();
             if (isRecent) {
                 this.statusIterator = this.personIterator.next().getStatusesRecent().iterator();
             } else {
@@ -66,7 +65,6 @@ public class StatusIteratorImpl implements StatusIterator {
             if (!this.personIterator.hasNext()){
                 break;
             }
-            this.personIterator.next();
             if (isRecent) {
                 this.statusIterator = this.personIterator.next().getStatusesRecent().iterator();
             } else {

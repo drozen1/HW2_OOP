@@ -284,18 +284,18 @@ public class FaceOOPImplTest {
         Person p7 = fo.getUser(7);
         Person pNot = new PersonImpl(8, "karen8");
 
-        p1.postStatus("p1s1");
-        p1.postStatus("p1s2");
-        p1.postStatus("p1s3");
+        Status p1s1 = p1.postStatus("p1s1");
+        Status p1s2 = p1.postStatus("p1s2");
+        Status p1s3 = p1.postStatus("p1s3");
 
-        p2.postStatus("p2s1");
+        Status p2s1 = p2.postStatus("p2s1");
 
-        p3.postStatus("p3s1");
-        p3.postStatus("p3s1");
+        Status p3s1 = p3.postStatus("p3s1");
+        Status p3s2 = p3.postStatus("p3s2");
 
-        p4.postStatus("p4s1");
-        p4.postStatus("p4s2");
-        p4.postStatus("p4s3");
+        Status p4s1 = p4.postStatus("p4s1");
+        Status p4s2 = p4.postStatus("p4s2");
+        Status p4s3 = p4.postStatus("p4s3");
 
         try {
             fo.getFeedByRecent(pNot);
@@ -335,6 +335,131 @@ public class FaceOOPImplTest {
         Assertions.assertEquals(statusIterator.next().getContent(),"p1s2");
         Assertions.assertEquals(statusIterator.hasNext(), true);
         Assertions.assertEquals(statusIterator.next().getContent(),"p1s1");
+        Assertions.assertEquals(statusIterator.hasNext(), false);
+
+        fo.addFriendship(p1,p3);
+
+        statusIterator = fo.getFeedByRecent(p1);
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p2s1");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p3s2");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p3s1");
+        Assertions.assertEquals(statusIterator.hasNext(), false);
+
+        fo.addFriendship(p6,p1);
+        Status p6s1 = p6.postStatus("p6s1");
+
+
+        statusIterator = fo.getFeedByRecent(p1);
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p2s1");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p3s2");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p3s1");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p6s1");
+        Assertions.assertEquals(statusIterator.hasNext(), false);
+
+        fo.addFriendship(p7,p4);
+
+        statusIterator = fo.getFeedByRecent(p4);
+        Assertions.assertEquals(statusIterator.hasNext(), false);
+
+        fo.addFriendship(p5,p4);
+
+        statusIterator = fo.getFeedByRecent(p4);
+        Assertions.assertEquals(statusIterator.hasNext(), false);
+
+        statusIterator = fo.getFeedByRecent(p5);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p1s3");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p1s2");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p1s1");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p4s3");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p4s2");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p4s1");
+        Assertions.assertEquals(statusIterator.hasNext(), false);
+
+        fo.joinFaceOOP(0, "karen0");
+        Person p0 = fo.getUser(0);
+        fo.addFriendship(p5,p0);
+
+        statusIterator = fo.getFeedByRecent(p5);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p1s3");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p1s2");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p1s1");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p4s3");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p4s2");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p4s1");
+        Assertions.assertEquals(statusIterator.hasNext(), false);
+
+        /** getFeedByPopular */
+        p3s1.like(p0);
+        p3s1.like(p1);
+
+        statusIterator = fo.getFeedByPopular(p1);
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p2s1");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p3s1");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p3s2");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p6s1");
+        Assertions.assertEquals(statusIterator.hasNext(), false);
+
+
+        p1s1.like(p0);
+        p1s2.like(p0);
+        p4s3.like(p0);
+        p4s1.like(p0);
+
+        fo.addFriendship(p5,p7);
+
+        statusIterator = fo.getFeedByPopular(p5);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p1s2");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p1s1");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p1s3");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p4s3");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p4s1");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p4s2");
+        Assertions.assertEquals(statusIterator.hasNext(), false);
+
+        fo.addFriendship(p3,p5);
+
+        statusIterator = fo.getFeedByPopular(p5);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p1s2");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p1s1");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p1s3");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p3s1");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p3s2");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p4s3");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p4s1");
+        Assertions.assertEquals(statusIterator.hasNext(), true);
+        Assertions.assertEquals(statusIterator.next().getContent(),"p4s2");
         Assertions.assertEquals(statusIterator.hasNext(), false);
 
 
