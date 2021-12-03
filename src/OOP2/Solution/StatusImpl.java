@@ -20,7 +20,9 @@ public class StatusImpl implements Status {
 	 */
 	public StatusImpl(Person publisher, String content, Integer id)
 	{
-		this.publisher = new PersonImpl(publisher.getId(), publisher.getName());
+		//TODO
+		//this.publisher = new PersonImpl(publisher.getId(), publisher.getName());
+		this.publisher = publisher;
 		this.content = content;
 		this.id = id;
 		this.likes = new HashSet<>();
